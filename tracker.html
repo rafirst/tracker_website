@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoLink Tracker - Advanced Link Tracking Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-gradient {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .tracking-link {
+            background: linear-gradient(145deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .map-container {
+            background: linear-gradient(145deg, #e2e8f0 0%, #cbd5e1 100%);
+            min-height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-map-marker-alt text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">GeoLink Tracker</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">Features</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">How it Works</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Track Links with Precision</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90">
+                    Create tracking links that capture detailed location analytics when opened
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <a href="#tracker" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-plus-circle mr-2"></i>Create Tracking Link
+                    </a>
+                    <a href="#analytics" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                        <i class="fas fa-chart-bar mr-2"></i>View Analytics
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracker Section -->
+    <section id="tracker" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Create Your Tracking Link</h2>
+                <p class="text-xl text-gray-600">Generate a unique link that captures location data when clicked</p>
+            </div>
+
+            <div class="card-gradient rounded-2xl p-8 md:p-12 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Destination URL</label>
+                            <input type="url" id="destinationUrl" placeholder="https://example.com" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Link Name (Optional)</label>
+                            <input type="text" id="linkName" placeholder="My Campaign Link" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <button onclick="generateTrackingLink()" 
+                                class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">
+                            <i class="fas fa-link mr-2"></i>Generate Tracking Link
+                        </button>
+                    </div>
+                    <div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-4">What we track:</h3>
+                            <ul class="space-y-3 text-blue-800">
+                                <li class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                                    Approximate location (city, country)
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-globe text-blue-600 mr-3"></i>
+                                    IP Address and ISP info
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-desktop text-blue-600 mr-3"></i>
+                                    Device and browser details
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-clock text-blue-600 mr-3"></i>
+                                    Exact timestamp of access
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-mobile-alt text-blue-600 mr-3"></i>
+                                    Mobile vs Desktop detection
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generated Link Display -->
+                <div id="generatedLinkContainer" class="mt-8 hidden">
+                    <div class="tracking-link p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Your Tracking Link:</h3>
+                        <div class="flex flex-col md:flex-row gap-4 items-center">
+                            <input type="text" id="trackingLink" readonly 
+                                   class="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-blue-600 font-mono" 
+                                   onclick="this.select()">
+                            <div class="flex gap-2">
+                                <button onclick="copyToClipboard()" 
+                                        class="px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <button onclick="testTrackingLink()" 
+                                        class="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                    <i class="fas fa-test"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-3">
+                            Share this link. When someone opens it, we'll capture their location data.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard -->
+    <section id="analytics" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Analytics Dashboard</h2>
+                <p class="text-xl text-gray-600">Monitor your tracking link performance</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-md text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2" id="totalClicks">0</div>
+                    <div class="text-gray-600">Total Clicks</div>
+                    <i class="fas fa-mouse-pointer text-blue-400 text-2xl mt-3"></i>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-md text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2" id="uniqueVisitors">0</div>
+                    <div class="text-gray-600">Unique Visitors</div>
+                    <i class="fas fa-users text-green-400 text-2xl mt-3"></i>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-md text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2" id="countries">0</div>
+                    <div class="text-gray-600">Countries</div>
+                    <i class="fas fa-globe-americas text-purple-400 text-2xl mt-3"></i>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-2xl shadow-md text-center">
+                    <div class="text-3xl font-bold text-orange-600 mb-2" id="mobileRate">0%</div>
+                    <div class="text-gray-600">Mobile Traffic</div>
+                    <i class="fas fa-mobile-alt text-orange-400 text-2xl mt-3"></i>
+                </div>
+            </div>
+
+            <!-- Tracking Results -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">Tracking Results</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Device</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">IP Address</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trackingResults" class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                    <i class="fas fa-inbox text-4xl text-gray-300 mb-3"></i>
+                                    <p>No tracking data yet. Generate a link and share it to see results.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+                <p class="text-xl text-gray-600">Everything you need for comprehensive link tracking</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marked-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Geolocation Tracking</h3>
+                    <p class="text-gray-600">Capture approximate location data including city and country for every click.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Real-time Analytics</h3>
+                    <p class="text-gray-600">Monitor clicks, unique visitors, and engagement metrics in real-time.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Privacy Compliant</h3>
+                    <p class="text-gray-600">Respect user privacy with approximate location data and transparent tracking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">GeoLink Tracker</h3>
+                    <p class="text-gray-400">Advanced link tracking with geolocation capabilities for marketers and businesses.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Contact</h3>
+                    <p class="text-gray-400">Email: contact@geolinktracker.com</p>
+                    <p class="text-gray-400">Support: support@geolinktracker.com</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Legal</h3>
+                    <p class="text-gray-400">Privacy Policy</p>
+                    <p class="text-gray-400">Terms of Service</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 GeoLink Tracker. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize tracking data
+        let trackingData = JSON.parse(localStorage.getItem('trackingData')) || [];
+        let trackingLinks = JSON.parse(localStorage.getItem('trackingLinks')) || [];
+
+        // Check if this is a tracking link access
+        const urlParams = new URLSearchParams(window.location.search);
+        const trackId = urlParams.get('track');
+        
+        if (trackId) {
+            // This is a tracking link access - capture data
+            captureTrackingData(trackId);
+        } else {
+            // Normal page access - update analytics
+            updateAnalytics();
+        }
+
+        function generateTrackingLink() {
+            const destinationUrl = document.getElementById('destinationUrl').value;
+            const linkName = document.getElementById('linkName').value || 'Untitled Link';
+
+            if (!destinationUrl) {
+                alert('Please enter a destination URL');
+                return;
+            }
+
+            // Generate unique track ID
+            const trackId = 'track_' + Math.random().toString(36).substr(2, 9);
+            
+            // Create tracking URL
+            const trackingUrl = `${window.location.origin}${window.location.pathname}?track=${trackId}&redirect=${encodeURIComponent(destinationUrl)}`;
+            
+            // Save tracking link
+            trackingLinks.push({
+                id: trackId,
+                name: linkName,
+                destination: destinationUrl,
+                trackingUrl: trackingUrl,
+                createdAt: new Date().toISOString()
+            });
+            
+            localStorage.setItem('trackingLinks', JSON.stringify(trackingLinks));
+            
+            // Display generated link
+            document.getElementById('trackingLink').value = trackingUrl;
+            document.getElementById('generatedLinkContainer').classList.remove('hidden');
+            
+            alert('Tracking link generated successfully!');
+        }
+
+        function copyToClipboard() {
+            const trackingLink = document.getElementById('trackingLink');
+            trackingLink.select();
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        }
+
+        function testTrackingLink() {
+            const trackingLink = document.getElementById('trackingLink').value;
+            window.open(trackingLink, '_blank');
+        }
+
+        function captureTrackingData(trackId) {
+            // Get user's approximate location using IP
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(locationData => {
+                    const trackingEntry = {
+                        id: Math.random().toString(36).substr(2, 9),
+                        trackId: trackId,
+                        timestamp: new Date().toISOString(),
+                        ip: locationData.ip,
+                        city: locationData.city,
+                        country: locationData.country_name,
+                        region: locationData.region,
+                        timezone: locationData.timezone,
+                        isp: locationData.org,
+                        device: navigator.userAgent,
+                        isMobile: /Mobile|Android/i.test(navigator.userAgent),
+                        browser: getBrowserInfo(),
+                        platform: navigator.platform
+                    };
+
+                    // Save tracking data
+                    trackingData.push(trackingEntry);
+                    localStorage.setItem('trackingData', JSON.stringify(trackingData));
+
+                    // Redirect to destination
+                    const redirectUrl = new URLSearchParams(window.location.search).get('redirect');
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error capturing location:', error);
+                    // Still redirect even if location capture fails
+                    const redirectUrl = new URLSearchParams(window.location.search).get('redirect');
+                    if (redirectUrl) {
+                        window.location.href = redirectUrl;
+                    }
+                });
+        }
+
+        function getBrowserInfo() {
+            const userAgent = navigator.userAgent;
+            if (userAgent.includes('Chrome')) return 'Chrome';
+            if (userAgent.includes('Firefox')) return 'Firefox';
+            if (userAgent.includes('Safari')) return 'Safari';
+            if (userAgent.includes('Edge')) return 'Edge';
+            return 'Unknown';
+        }
+
+        function updateAnalytics() {
+            const totalClicks = trackingData.length;
+            const uniqueVisitors = new Set(trackingData.map(entry => entry.ip)).size;
+            const countries = new Set(trackingData.map(entry => entry.country)).size;
+            const mobileClicks = trackingData.filter(entry => entry.isMobile).length;
+            const mobileRate = totalClicks > 0 ? Math.round((mobileClicks / totalClicks) * 100) : 0;
+
+            document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
+            document.getElementById('uniqueVisitors').textContent = uniqueVisitors.toLocaleString();
+            document.getElementById('countries').textContent = countries.toLocaleString();
+            document.getElementById('mobileRate').textContent = mobileRate + '%';
+
+            // Update tracking results table
+            const resultsContainer = document.getElementById('trackingResults');
+            if (trackingData.length === 0) {
+                resultsContainer.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            <i class="fas fa-inbox text-4xl text-gray-300 mb-3"></i>
+                            <p>No tracking data yet. Generate a link and share it to see results.</p>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                resultsContainer.innerHTML = trackingData.map(entry => `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${new Date(entry.timestamp).toLocaleString()}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${entry.city}, ${entry.country}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${entry.isMobile ? 'Mobile' : 'Desktop'} - ${entry.browser}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            ${entry.ip}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <button onclick="viewDetails('${entry.id}')" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function viewDetails(entryId) {
+            const entry = trackingData.find(e => e.id === entryId);
+            if (entry) {
+                const details = `
+                    Time: ${new Date(entry.timestamp).toLocaleString()}
+                    IP: ${entry.ip}
+                    Location: ${entry.city}, ${entry.region}, ${entry.country}
+                    Timezone: ${entry.timezone}
+                    ISP: ${entry.isp}
+                    Device: ${entry.device}
+                    Browser: ${entry.browser}
+                    Platform: ${entry.platform}
+                    Mobile: ${entry.isMobile ? 'Yes' : 'No'}
+                `;
+                alert('Tracking Details:\n\n' + details);
+            }
+        }
+
+        // Initialize analytics on page load
+        document.addEventListener('DOMContentLoaded', updateAnalytics);
+    </script>
+</body>
+</html>
+
